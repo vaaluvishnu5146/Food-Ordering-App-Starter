@@ -21,7 +21,7 @@ export default function FoodListItem({ data = {}, onClick = () => {} }) {
             alignItems: "center",
           }}
         >
-          <img src={''} alt="food" />
+          <img src={'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Ffood-icon-png%2Ffood-icon-png-13.jpg&f=1&nofb=1&ipt=284993ee1826aa07afc83ae0193c0278cc3e44d15320a9c31e45f049c8974e02&ipo=images'} alt="food" />
           <Box className="list-body-content">
             <Typography variant="body" fontWeight={600}>
               {data.name}

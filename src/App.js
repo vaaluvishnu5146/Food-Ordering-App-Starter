@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { openRoutes, closedRoutes } from "./Configs/Routes";
 import { useSelector, useDispatch } from "react-redux";
 import { saveLoggedInUser } from "./Redux/Reducers/Authentication.reducer";
+import { useJwt } from "react-jwt";
 
 function App() {
   const dispatcher = useDispatch()
   const { isLoggedIn } = useSelector((state) => state.authentication);
   const token = sessionStorage.getItem('_tk')
+  const { decodedToken } = useJwt(token || "")
 
   useEffect(() => {
     console.log("Token", token)
-    dispatcher(saveLoggedInUser({ token }))
-  }, [token]);
+    if (token && decodedToken) {
+      dispatcher(saveLoggedInUser({ token, userId: decodedToken._id }))
+    }
+  }, [token, decodedToken]);
 
   return (
     <div className="App">
